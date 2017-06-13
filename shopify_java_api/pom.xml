@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.datapak</groupId>
 	<artifactId>shopify_java_api</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Shopify API</name>
 	<description>Java Interface to Shopify</description>
 	 <distributionManagement>
