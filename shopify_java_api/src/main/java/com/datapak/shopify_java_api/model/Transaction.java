@@ -7,7 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.datapak.shopify_java_api.interfaces.JSONInterface;
-import com.datapak.shopifybanking.application.ErrorCode;
+
 
 /** 
  * Represents a Shopify transaction
@@ -31,7 +31,7 @@ public class Transaction implements JSONInterface {
 	private String kind;
 	private Long order_id;
 	private String receipt;
-	private ErrorCode error_code;
+	private String error_code;
 	private String status;
 	private Boolean test;
 	private String user_id;
@@ -184,8 +184,8 @@ public class Transaction implements JSONInterface {
 	
 	/** Gets the kind of transaction. 
 	 * 
-	 * @return A TransactionKind object containing the kind of transaction.
-	 * @see TransactionKind
+	 * @return A String object containing the kind of transaction.
+	 * 
 	 */
 	public String getKind() {
 		return kind;
@@ -194,8 +194,8 @@ public class Transaction implements JSONInterface {
 	
 	/** Sets the kind of transaction. 
 	 * 
-	 * @param kind A TransactionKind object containing the kind of transaction.
-	 * @see TransactionKind
+	 * @param kind A String object containing the kind of transaction.
+	 * 
 	 */
 	public void setKind(String kind) {
 		this.kind = kind;
@@ -238,7 +238,7 @@ public class Transaction implements JSONInterface {
 	/** Get standardized error code, independent of the payment provider.
 	 * @return A ErrorCode object containing the standardized error code;
 	 */
-	public ErrorCode getError_code() {
+	public String getError_code() {
 		return error_code;
 	}
 	
@@ -246,14 +246,14 @@ public class Transaction implements JSONInterface {
 	/** Set standardized error code, independent of the payment provider.
 	 * @param error_code A ErrorCode object containing the standardized error code;
 	 */
-	public void setError_code(ErrorCode error_code) {
+	public void setError_code(String error_code) {
 		this.error_code = error_code;
 	}
 	
 	/** Get status of the transaction 
 	 * 
-	 * @return A Status Object containing the status of the transaction.
-	 * @see Status
+	 * @return A String Object containing the status of the transaction.
+	 * 
 	 */
 	public String getStatus() {
 		return status;
@@ -262,8 +262,8 @@ public class Transaction implements JSONInterface {
 	
 	/** Set status of the transaction 
 	 * 
-	 * @param status A Status Object containing the status of the transaction.
-	 * @see Status
+	 * @param status A String Object containing the status of the transaction.
+	 * 
 	 */
 	public void setStatus(String status) {
 		this.status = status;
