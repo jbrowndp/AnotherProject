@@ -28,11 +28,11 @@ public class Transaction implements JSONInterface {
 	private String source_name;
 	private PaymentDetail[] payment_details;
 	private Long id;
-	private TransactionKind kind;
+	private String kind;
 	private Long order_id;
 	private String receipt;
 	private ErrorCode error_code;
-	private Status status;
+	private String status;
 	private Boolean test;
 	private String user_id;
 	private String currency;
@@ -187,7 +187,7 @@ public class Transaction implements JSONInterface {
 	 * @return A TransactionKind object containing the kind of transaction.
 	 * @see TransactionKind
 	 */
-	public TransactionKind getKind() {
+	public String getKind() {
 		return kind;
 	}
 	
@@ -197,7 +197,7 @@ public class Transaction implements JSONInterface {
 	 * @param kind A TransactionKind object containing the kind of transaction.
 	 * @see TransactionKind
 	 */
-	public void setKind(TransactionKind kind) {
+	public void setKind(String kind) {
 		this.kind = kind;
 	}
 	
@@ -255,7 +255,7 @@ public class Transaction implements JSONInterface {
 	 * @return A Status Object containing the status of the transaction.
 	 * @see Status
 	 */
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	
@@ -265,7 +265,7 @@ public class Transaction implements JSONInterface {
 	 * @param status A Status Object containing the status of the transaction.
 	 * @see Status
 	 */
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	
@@ -348,7 +348,7 @@ public class Transaction implements JSONInterface {
 		obj.put("source_name", source_name);
 		obj.put("payment_details", ArrayParser.toJSON(payment_details));
 		obj.put("id", id);
-		obj.put("kind", kind.name().toLowerCase());
+		obj.put("kind", kind);
 		obj.put("order_id", order_id);
 		obj.put("receipt", receipt);
 		obj.put("error_code", error_code);
@@ -375,11 +375,9 @@ public class Transaction implements JSONInterface {
 		this.setSource_name("source_web");
 		this.setId((Long) json.get("id"));
 		
-		//FIXME: Need to have non-null 
-		TransactionKind transactionKind = null;
-		//transactionKind.fromJSON((JSONObject) json.get("kind"));
+
 		
-		this.setKind(transactionKind);
+		this.setKind((String) json.get("kind"));
 		this.setOrder_id((Long) json.get("order_id"));
 		
 		//FIXME: Returns JSONObject need to parse this
@@ -392,10 +390,7 @@ public class Transaction implements JSONInterface {
 		//this.setError_code(convertErrorCodefromJSON(json.get("error_code").toString()));
 		
 		
-		//FIXME: Need to have non-null 
-		Status status = null;
-		//status.fromJSON((JSONObject) json.get("status"));
-		this.setStatus(status);
+		this.setStatus((String) json.get("status"));
 		this.setTest((Boolean) json.get("test"));
 		this.setUser_id((String) json.get("user_id"));
 		this.setCurrency((String) json.get("currency"));

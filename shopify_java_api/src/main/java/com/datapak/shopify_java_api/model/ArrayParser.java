@@ -132,7 +132,7 @@ public class ArrayParser {
 	}
 	
 	/** Converts from JSONArray into ShippingLine[]
-	 *  @param JSONArray containing shipping lines in JSON format
+	 *  @param jsonArray  array containing shipping lines in JSON format
 	 *  @return ShippingLine[] containing shipping lines.
 	 */
 	public static ShippingLine[] toShippingLines(JSONArray jsonArray)
@@ -375,7 +375,7 @@ public class ArrayParser {
 	
 	/** Converts from Refund_Line_item[] into JSONArray
 	 * 
-	 * @param refund_line_item array of refund_line_items
+	 * @param refund_line_items array of refund_line_items
 	 * @return JSONArray containing refund_line_items in JSON
 	 */
 	public static JSONArray toJSON(Refund_Line_Item[] refund_line_items)

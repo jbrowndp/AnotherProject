@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.datapak.shopifybanking.application.JSONParser;
 
 
 public class Refund extends ShopifyObject {
@@ -120,10 +119,9 @@ public class Refund extends ShopifyObject {
 		
 		logger.entry(json);
 		if (json ==null) {return; }
-		JSONParser parser = new JSONParser();
 	
-		this.setCreated_at(parser.parseDate_ISO8601((String) json.get("created_at")));
-		this.setProcessed_at(parser.parseDate_ISO8601((String) json.get("processed_at")));
+		this.setCreated_at(ISODate((String) json.get("created_at")));
+		this.setProcessed_at(ISODate((String) json.get("processed_at")));
 		//refund.setShipping(convertShippingfromJSON((JSONObject) json.get("shipping")));
 		
 		Shipping shipping = new Shipping();

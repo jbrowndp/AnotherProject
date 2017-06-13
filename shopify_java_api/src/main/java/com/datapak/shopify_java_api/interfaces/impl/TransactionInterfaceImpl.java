@@ -14,13 +14,13 @@ import com.datapak.shopify_java_api.interfaces.TransactionInterface;
 import com.datapak.shopify_java_api.model.ArrayParser;
 import com.datapak.shopify_java_api.model.ShopifyError;
 import com.datapak.shopify_java_api.model.Transaction;
-import com.datapak.shopifybanking.application.JSONParser;
+
 
 
 @SuppressWarnings("unchecked")
 public class TransactionInterfaceImpl extends ShopifyInterface implements TransactionInterface {
 	
-	private JSONParser parser = new JSONParser();
+
 	private Logger logger = LogManager.getLogger();
 	
 
@@ -57,8 +57,8 @@ public class TransactionInterfaceImpl extends ShopifyInterface implements Transa
 			throw e;
 		}
 		
-		Transaction transaction = parser.convertTransactionfromJSON((JSONArray)response.get("transactions"))[0];
-		
+		Transaction transaction = ArrayParser.toTransactions((JSONArray) response.get("transactions"))[0];
+
 		logger.info("Retrieved transaction: {}",transaction);
 		
 		return transaction;
