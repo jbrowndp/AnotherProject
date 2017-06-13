@@ -25,7 +25,7 @@ public class TransactionInterfaceTest {
 	@Test
 	public void testCaptureTransaction_PreviousOrderFullAmount(){
 		
-		Order order = TestOrderFactory.getOrderbyTagforTesting("capture");
+		Order order = TestOrderFactory.getOrderbyTagforTesting("authorized");
 		assertNotNull("No order available to capture", order);
 		
 		try {
@@ -184,13 +184,5 @@ public class TransactionInterfaceTest {
 		
 	}
 	
-	@Test
-	public void test_createTransaction()
-	{
-		Transaction transaction = new Transaction();
-		Transaction response = shopify.getTransactionManager().createTransaction(transaction);
-		
-		assertNotNull(response);
-	}
 
 }
