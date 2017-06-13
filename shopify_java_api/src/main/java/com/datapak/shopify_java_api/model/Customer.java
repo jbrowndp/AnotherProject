@@ -19,13 +19,13 @@ public class Customer extends ShopifyObject{
 	private String email;
 	private String phone;
 	private String first_name;
-	private String id;
+	private Long id;
 	private String last_name;
 	private String note;
-	private String orders_count;
+	private Long orders_count;
 	private String state;
 	private String total_spent;
-	private String updated_at;
+	private Date updated_at;
 	private String tags;
 	
 	
@@ -117,7 +117,7 @@ public class Customer extends ShopifyObject{
 	 * 
 	 * @return A String containing the unique numeric identifier for the customer
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
@@ -125,7 +125,7 @@ public class Customer extends ShopifyObject{
 	 * 
 	 * @param id A String containing the unique numeric identifier for the customer
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -165,7 +165,7 @@ public class Customer extends ShopifyObject{
 	 * 
 	 * @return A String containing the number of orders placed by this customer to a shop.
 	 */
-	public String getOrders_count() {
+	public Long getOrders_count() {
 		return orders_count;
 	}
 	
@@ -173,7 +173,7 @@ public class Customer extends ShopifyObject{
 	 * 
 	 * @param orders_count A String containing the number of orders placed by this customer to a shop
 	 */
-	public void setOrders_count(String orders_count) {
+	public void setOrders_count(Long orders_count) {
 		this.orders_count = orders_count;
 	}
 	
@@ -196,15 +196,15 @@ public class Customer extends ShopifyObject{
 	 * 
 	 * @return A String containing the date and time when the customer record was last updated.
 	 */
-	public String getUpdated_at() {
+	public Date getUpdated_at() {
 		return updated_at;
 	}
 	
 	/** Sets the date and time when the customer record was last updated.
 	 * 
-	 * @param updated_at A String containing the date and time when the custoemr record was last updated
+	 * @param updated_at A Date object containing the date and time when the custoemr record was last updated
 	 */
-	public void setUpdated_at(String updated_at) {
+	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
 	
@@ -258,18 +258,20 @@ public class Customer extends ShopifyObject{
 	public void fromJSON(JSONObject json) {
 		
 		
+		if (json==null) { return; }
+		
 		this.setAccepts_marketing((boolean) json.get("accepts_marketing"));
-		this.setCreated_at((Date) json.get("created_at"));
+		this.setCreated_at(ISODate((String) json.get("created_at")));
 		this.setEmail((String) json.get("email"));
 		this.setPhone((String) json.get("phone"));
 		this.setFirst_name((String) json.get("first_name"));
-		this.setId((String) json.get("id"));
+		this.setId((Long) json.get("id"));
 		this.setLast_name((String) json.get("last_name"));
 		this.setNote((String) json.get("note"));
-		this.setOrders_count((String) json.get("orders_count"));
+		this.setOrders_count((Long) json.get("orders_count"));
 		this.setState((String) json.get("state"));
 		this.setTotal_spent((String) json.get("total_spent"));
-		this.setUpdated_at((String) json.get("updated_at"));
+		this.setUpdated_at(ISODate((String) json.get("updated_at")));
 		this.setTags((String) json.get("tags"));
 		
 		

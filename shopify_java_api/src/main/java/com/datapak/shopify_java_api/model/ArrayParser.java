@@ -1,7 +1,6 @@
 package com.datapak.shopify_java_api.model;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,8 +22,8 @@ public class ArrayParser {
 	
 	/** Converts from DiscountCode[] into JSONArray
 	 * 
-	 * @param discount_code array containing discount codes
-	 * @return JSONArray containing discount codes
+	 * @param discount_codes array containing discount codes
+	 * @return JSONArray containing discount codes in JSON format
 	 */
 	public static JSONArray toJSON(DiscountCode[] discount_codes)
 	{
@@ -45,7 +44,8 @@ public class ArrayParser {
 	
 	
 	/** Converts from JSONArray into DiscountCode[]
-	 * 
+	 * @param jsonArray  jsonArray containing discount codes in JSON format
+	 * @return DiscountCode[] containing discount code
 	 */
 	public static DiscountCode[] toDiscountCodes(JSONArray jsonArray)
 	{
@@ -69,7 +69,7 @@ public class ArrayParser {
 	/** Converts from Refund[] into JSONArray
 	 * 
 	 * @param refunds array containing refunds
-	 * @return
+	 * @return JSONArray containing refunds in JSON format
 	 */
 	public static JSONArray toJSON(Refund[] refunds)
 	{
@@ -87,7 +87,8 @@ public class ArrayParser {
 	}
 	
 	/** Converts from JSONArray into Refund[]
-	 *  
+	 *  @param jsonArray jsonArray containing refunds in JSON format
+	 *  @return Refund[] containing refunds
 	 */
 	public static Refund[] toRefund(JSONArray jsonArray)
 	{
@@ -110,8 +111,8 @@ public class ArrayParser {
 	
 	/** Converts from ShippingLine[] into JSONArray
 	 * 
-	 * @param shippingLines array cntaining shippingLines
-	 * @return
+	 * @param shippingLines array containing shippingLines
+	 * @return JSONArray containing shippingLines
 	 */
 	public static JSONArray toJSON(ShippingLine[] shippingLines)
 	{
@@ -131,7 +132,8 @@ public class ArrayParser {
 	}
 	
 	/** Converts from JSONArray into ShippingLine[]
-	 * 
+	 *  @param JSONArray containing shipping lines in JSON format
+	 *  @return ShippingLine[] containing shipping lines.
 	 */
 	public static ShippingLine[] toShippingLines(JSONArray jsonArray)
 	{
@@ -151,10 +153,12 @@ public class ArrayParser {
 		return shippingLines;
 	}
 	
+	
+	
 	/** Converts from TaxLine[] into JSONArray
 	 * 
-	 * @param taxLine array containing taxLines
-	 * @return JSONArray containing taxLines
+	 * @param taxLines array containing taxlines
+	 * @return JSONArray containing taxLines in JSON format
 	 */
 	public static JSONArray toJSON(TaxLine[] taxLines)
 	{
@@ -172,8 +176,8 @@ public class ArrayParser {
 	
 	/** Converts from JSONArray into TaxLine[]
 	 * 
-	 * @param fulfillments
-	 * @return
+	 * @param jsonArray  array containing taxLines in JSON format
+	 * @return TaxLine[] containing taxLines
 	 */
 	public static TaxLine[] toTaxLines(JSONArray jsonArray)
 	{
@@ -194,9 +198,9 @@ public class ArrayParser {
 	}
 	
 	
-	/** Convert from JSONArray to FulFillment[]
-	 * @param fulfillments
-	 * @return
+	/** Convert from Fulfillment[] to JSONArray
+	 * @param fulfillments array containing  fulfillments
+	 * @return JSONArray containing fulfillments in JSON format
 	 */
 	public static JSONArray toJSON(FulFillment[] fulfillments) {
 		JSONArray fulfillment_array = new JSONArray();
@@ -210,14 +214,35 @@ public class ArrayParser {
 		return fulfillment_array;
 	}
 
-	
-	
+	/** Convert from JSONArray to FulFillment[]
+	 * @param jsonArray array containing fulfillments in JSON format
+	 * @return JSONArray containing fulfillments in JSON format
+	 */
+	public static FulFillment[] toFulfillments(JSONArray jsonArray) {
+		
+		logger.entry(jsonArray);
+		if (jsonArray==null) return null;
+		
+		FulFillment[] fullfilments = new FulFillment[jsonArray.size()];
+		
+		for (int index=0; index<jsonArray.size(); index++)
+		{
+			FulFillment fulfillment = new FulFillment();
+			fulfillment.fromJSON((JSONObject) jsonArray.get(index));
+			fullfilments[index]= fulfillment;
+		}
+		
+		logger.traceExit(Arrays.toString(fullfilments));
+		
+		return fullfilments;
+		
+	}
 	
 	
 	/** Converts from LineItem[] into JSONArray
 	 * 
 	 * @param line_items array of line items
-	 * @return JSONArray containing line items
+	 * @return JSONArray containing line items in JSON
 	 */
 	public static JSONArray toJSON(LineItem[] line_items) {
 		
@@ -232,10 +257,36 @@ public class ArrayParser {
 		return line_item_array;
 	}
 
+	/** Converts from JSONArray to LineItem[]
+	 * 
+	 * @param jsonArray array of line items in JSON format
+	 * @return LineItem[] containing line items
+	 */
+	public static LineItem[] toLineItems(JSONArray jsonArray) {
+
+		logger.entry(jsonArray);
+		
+		if (jsonArray==null) return null;
+		
+		LineItem[] lineItems= new LineItem[jsonArray.size()];
+		
+		for (int index=0; index<jsonArray.size(); index++)
+		{
+			LineItem lineItem = new LineItem();
+			lineItem.fromJSON((JSONObject) jsonArray.get(index));
+			lineItems[index]= lineItem;
+		}
+		
+		logger.traceExit(Arrays.toString(lineItems));
+		
+		return lineItems;
+	}
+	
+	
 	/** Converts from PaymentDetail[] into JSONArray
 	 * 
 	 * @param payment_details array of payment details
-	 * @return JSONArray containing payments details
+	 * @return JSONArray containing payments details in JSON
 	 */
 	public static JSONArray toJSON(PaymentDetail[] payment_details) {
 
@@ -251,79 +302,11 @@ public class ArrayParser {
 	}
 	
 	
-	/** Converts from ShippingAddress[] into JSONArray
+	/** Converts from JSONArray into PaymentDetail[]
 	 * 
-	 * @param shippingAddresses array of shipping addresses
-	 * @return JSONArray containing shipping addresses
+	 * @param jsonArray array of payment details in JSON
+	 * @return PaymentDetail[] containing payment details
 	 */
-	public static JSONArray toJSON(ShippingAddress[] shippingAddresses) {
-		
-		
-		JSONArray shippingAddress_array = new JSONArray();
-		for (ShippingAddress shippingAddress: shippingAddresses)
-		{
-				JSONObject shippingAddressObject = shippingAddress.toJSON();
-				shippingAddress_array.add(shippingAddressObject);
-			
-		}
-		return shippingAddress_array;
-	}
-	
-	/** Converts from Refund_Line_item[] into JSONArray
-	 * 
-	 * @param refund_line_item array of payment details
-	 * @return JSONArray containing payments details
-	 */
-	public static JSONArray toJSON(Refund_Line_Item[] refund_line_items)
-	{
-			JSONArray refund_line_item_array = new JSONArray();
-		
-		for (Refund_Line_Item refund_line_item: refund_line_items)
-		{
-				JSONObject refund_Line_itemObject = refund_line_item.toJSON();
-				refund_line_item_array.add(refund_Line_itemObject);
-			
-		}
-		return refund_line_item_array;
-	}
-	/** Converts from PaymentDetail[] into JSONArray
-	 * 
-	 * @param payment_details array of payment details
-	 * @return JSONArray containing payments details
-	 */
-	public static JSONArray toJSON(Transaction[] transactions)
-	{
-			JSONArray transaction_array = new JSONArray();
-		
-		for (Transaction transaction: transactions)
-		{
-				JSONObject transactionObject = transaction.toJSON();
-				transaction_array.add(transactionObject);
-			
-		}
-		
-		return transaction_array;
-	}
-
-	public static Transaction[] toTransactions(JSONArray jsonArray) {
-		
-		logger.entry(jsonArray);
-		if (jsonArray==null) return null;
-		
-		Transaction[] transactions = new Transaction[jsonArray.size()];
-		
-		for (int index=0; index<jsonArray.size(); index++)
-		{
-			Transaction transaction = new Transaction();
-			transaction.fromJSON((JSONObject) jsonArray.get(index));
-			transactions[index]= transaction;
-		}
-		
-		logger.traceExit(Arrays.toString(transactions));
-		
-		return transactions;
-	}
-
 	public static PaymentDetail[] toPaymentDetails(JSONArray jsonArray) {
 		
 		logger.entry(jsonArray);
@@ -343,7 +326,163 @@ public class ArrayParser {
 		
 		return PaymentDetails;
 	}
+	
+	
+	/** Converts from ShippingAddress[] into JSONArray
+	 * 
+	 * @param shippingAddresses array of shipping addresses
+	 * @return JSONArray containing shipping addresses in JSON
+	 */
+	public static JSONArray toJSON(ShippingAddress[] shippingAddresses) {
+		
+		
+		JSONArray shippingAddress_array = new JSONArray();
+		for (ShippingAddress shippingAddress: shippingAddresses)
+		{
+				JSONObject shippingAddressObject = shippingAddress.toJSON();
+				shippingAddress_array.add(shippingAddressObject);
+			
+		}
+		return shippingAddress_array;
+	}
+	
+	
+	/** Converts from JSONArray into ShippingAddress[]
+	 * 
+	 * @param jsonArray array containing shipping addresses in JSON format
+	 * @return ShippingAddress[] containing shipping addresses 
+	 */
+	public static ShippingAddress[] toShippingAddress(JSONArray jsonArray) {
+		
+		logger.entry(jsonArray);
+		
+		if (jsonArray==null) return null;
+		
+		ShippingAddress[] shippingAddresses= new ShippingAddress[jsonArray.size()];
+		
+		for (int index=0; index<jsonArray.size(); index++)
+		{
+			ShippingAddress shippingAddress = new ShippingAddress();
+			shippingAddress.fromJSON((JSONObject) jsonArray.get(index));
+			shippingAddresses[index]= shippingAddress;
+		}
+		
+		logger.traceExit(Arrays.toString(shippingAddresses));
+		
+		return shippingAddresses;
+	}
+	
+	
+	/** Converts from Refund_Line_item[] into JSONArray
+	 * 
+	 * @param refund_line_item array of refund_line_items
+	 * @return JSONArray containing refund_line_items in JSON
+	 */
+	public static JSONArray toJSON(Refund_Line_Item[] refund_line_items)
+	{
+			JSONArray refund_line_item_array = new JSONArray();
+		
+		for (Refund_Line_Item refund_line_item: refund_line_items)
+		{
+				JSONObject refund_Line_itemObject = refund_line_item.toJSON();
+				refund_line_item_array.add(refund_Line_itemObject);
+			
+		}
+		return refund_line_item_array;
+	}
+	
+	/** Converts from JSONArray to Refund_Line_Item[]
+	 * 
+	 * @param jsonArray array of refund_line_items in JSON format
+	 * @return JSONArray containing refund_line_items
+	 */
+	public static Refund_Line_Item[] toRefundLineItems(JSONArray jsonArray)
+	{
+		logger.entry(jsonArray);
+		
+		if (jsonArray==null) return null;
+		
+		Refund_Line_Item[] refund_line_Items= new Refund_Line_Item[jsonArray.size()];
+		
+		for (int index=0; index<jsonArray.size(); index++)
+		{
+			Refund_Line_Item refund_line_Item = new Refund_Line_Item();
+			refund_line_Item.fromJSON((JSONObject) jsonArray.get(index));
+			refund_line_Items[index]= refund_line_Item;
+		}
+		
+		logger.traceExit(Arrays.toString(refund_line_Items));
+		
+		return refund_line_Items;
+	}
+	
+	/** Converts from JSONArray to Transaction[]
+	 * 
+	 * @param transactions array of transactions
+	 * @return JSONArray containing payments details in JSON
+	 */
+	public static JSONArray toJSON(Transaction[] transactions)
+	{
+			JSONArray transaction_array = new JSONArray();
+		
+		for (Transaction transaction: transactions)
+		{
+				JSONObject transactionObject = transaction.toJSON();
+				transaction_array.add(transactionObject);
+			
+		}
+		
+		return transaction_array;
+	}
 
+	/** Converts from Transaction[] into JSONArray
+	 * 
+	 * @param jsonArray array of transactions in JSON format
+	 * @return Transaction[] containing transactions
+	 */
+	public static Transaction[] toTransactions(JSONArray jsonArray) {
+		
+		logger.entry(jsonArray);
+		if (jsonArray==null) return null;
+		
+		Transaction[] transactions = new Transaction[jsonArray.size()];
+		
+		for (int index=0; index<jsonArray.size(); index++)
+		{
+			Transaction transaction = new Transaction();
+			transaction.fromJSON((JSONObject) jsonArray.get(index));
+			transactions[index]= transaction;
+		}
+		
+		logger.traceExit(Arrays.toString(transactions));
+		
+		return transactions;
+	}
+
+	/** Converts from Order[] to JSONArray
+	 * 
+	 * @param orders array of orders
+	 * @return JSONArray containing orders in JSON
+	 */
+	public static JSONArray toJSON(Order[] orders)
+	{
+		JSONArray order_array = new JSONArray();
+		
+		for (Order order: orders)
+		{
+				JSONObject orderObject = order.toJSON();
+				order_array.add(orderObject);
+			
+		}
+		
+		return order_array;
+	}
+	
+	/** Converts from JSONArray to Order[]
+	 * 
+	 * @param jsonArray array containing orders in JSON
+	 * @return Order[] containing orders
+	 */
 	public static Order[] toOrders(JSONArray jsonArray) {
 		
 		logger.entry(jsonArray);
@@ -366,92 +505,98 @@ public class ArrayParser {
 		
 	}
 	
-	public static LineItem[] toLineItems(JSONArray jsonArray) {
-
-		logger.entry(jsonArray);
+	/** Converts from customer[] to JSONArray
+	 * 
+	 * @param customers array of customers
+	 * @return JSONArray containing customers in JSON
+	 */
+	public static JSONArray toJSON(Customer[] customers) {
+		JSONArray customer_array = new JSONArray();
 		
-		if (jsonArray==null) return null;
-		
-		LineItem[] lineItems= new LineItem[jsonArray.size()];
-		
-		for (int index=0; index<jsonArray.size(); index++)
+		for (Customer customer: customers)
 		{
-			LineItem lineItem = new LineItem();
-			lineItem.fromJSON((JSONObject) jsonArray.get(index));
-			lineItems[index]= lineItem;
+				JSONObject customerObject = customer.toJSON();
+				customer_array.add(customerObject);
+			
 		}
 		
-		logger.traceExit(Arrays.toString(lineItems));
-		
-		return lineItems;
+		return customer_array;
 	}
 	
-
-	public static Refund_Line_Item[] toRefundLineItems(JSONArray jsonArray)
-	{
-		logger.entry(jsonArray);
+	
+	/** Converts from JSONArray to customer[]
+	 * 
+	 * @param jsonArray array containing customers in JSON
+	 * @return customer[] containing customers
+	 */
+	public static Customer[] toCustomers(JSONArray jsonArray) {
+	logger.entry(jsonArray);
 		
 		if (jsonArray==null) return null;
 		
-		Refund_Line_Item[] refund_line_Items= new Refund_Line_Item[jsonArray.size()];
+		Customer[] customers= new Customer[jsonArray.size()];
 		
 		for (int index=0; index<jsonArray.size(); index++)
 		{
-			Refund_Line_Item refund_line_Item = new Refund_Line_Item();
-			refund_line_Item.fromJSON((JSONObject) jsonArray.get(index));
-			refund_line_Items[index]= refund_line_Item;
+			Customer customer = new Customer();
+			customer.fromJSON((JSONObject) jsonArray.get(index));
+			customers[index]= customer;
 		}
 		
-		logger.traceExit(Arrays.toString(refund_line_Items));
+		logger.traceExit(Arrays.toString(customers));
 		
-		return refund_line_Items;
+		return customers;
+	}
+	
+	/** Converts from ClientDetail[] to JSONArray
+	 * 
+	 * @param clientdetails array of client details
+	 * @return JSONArray containing client details in JSON
+	 */
+	public static JSONArray toJSON(ClientDetails[] clientdetails) {
+		JSONArray clientdetail_array = new JSONArray();
+		
+		for (ClientDetails clientdetail: clientdetails)
+		{
+				JSONObject clientdetailObject = clientdetail.toJSON();
+				clientdetail_array.add(clientdetailObject);
+			
+		}
+		
+		return clientdetail_array;
+	}
+	
+	
+	/** Converts from JSONArray to ClientDetail[]
+	 * 
+	 * @param jsonArray array containing client details in JSON
+	 * @return ClientDetail[] containing client details
+	 */
+	public static ClientDetails[] toClientDetails(JSONArray jsonArray) {
+	logger.entry(jsonArray);
+		
+		if (jsonArray==null) return null;
+		
+		ClientDetails[] clientdetails= new ClientDetails[jsonArray.size()];
+		
+		for (int index=0; index<jsonArray.size(); index++)
+		{
+			ClientDetails clientdetail = new ClientDetails();
+			clientdetail.fromJSON((JSONObject) jsonArray.get(index));
+			clientdetails[index]= clientdetail;
+		}
+		
+		logger.traceExit(Arrays.toString(clientdetails));
+		
+		return clientdetails;
 	}
 
 
-	public static JSONArray toJSON(Customer[] customer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
-	public static JSONArray toJSON(ClientDetails[] client_details) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 
 
-	public static JSONArray toJSON(String[] payment_gateway_names) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-
-	public static ClientDetails[] toClientDetails(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public static Customer[] toCustomers(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public static FulFillment[] toFulfillments(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public static String[] toGatewayName(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public static ShippingAddress[] toShippingAddress(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -133,6 +133,8 @@ public class ClientDetails extends ShopifyObject{
 	@Override
 	public void fromJSON(JSONObject json) {
 		
+		
+		if (json ==null) { return; }
 		this.setAccept_language((String) json.get("accept_language"));
 		this.setBrowser_height((String) json.get("browser_height"));
 		this.setBrowser_ip((String) json.get("brownser_ip"));

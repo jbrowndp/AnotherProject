@@ -78,7 +78,6 @@ public class ShopifyError extends Exception implements JSONInterface {
 		else if (json.get("error")!=null)
 		{
 			
-			String temp = (String) json.get("error");
 			messageString.append(json.get("error"));
 			
 		}	

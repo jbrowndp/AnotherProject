@@ -33,7 +33,7 @@ public class Order extends ShopifyObject {
 	
 	private String cart_token;
 	
-	private ClientDetails[] client_details;
+	private ClientDetails client_details;
 	
 	private Date closed_at;
 	
@@ -41,7 +41,7 @@ public class Order extends ShopifyObject {
 	
 	private String currency; 
 	
-	private Customer[] customer;
+	private Customer customer;
 	
 	private DiscountCode[] discountCodes;
 	
@@ -231,7 +231,7 @@ public class Order extends ShopifyObject {
 	 * 
 	 * @return ClientDetails[] object containing information about the client
 	 */
-	public ClientDetails[] getClient_details() {
+	public ClientDetails getClient_details() {
 		return client_details;
 	}
 	
@@ -240,7 +240,7 @@ public class Order extends ShopifyObject {
 	 * 
 	 * @param clientDetails object containing information about the client
 	 */
-	public void setClient_details(ClientDetails[] clientDetails) {
+	public void setClient_details(ClientDetails clientDetails) {
 		this.client_details = clientDetails;
 	}
 	
@@ -278,11 +278,11 @@ public class Order extends ShopifyObject {
 		this.currency = currency;
 	}
 
-	public Customer[] getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer[] customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
@@ -587,11 +587,11 @@ public class Order extends ShopifyObject {
 		obj.put("cancel_reason", cancel_reason);
 		obj.put("cancelled_at", cancelled_at);
 		obj.put("cart_token", cart_token);
-		obj.put("client_details", ArrayParser.toJSON(client_details));
+		obj.put("client_details", client_details.toJSON());
 		obj.put("closed_at", closed_at);
 		obj.put("created_at", created_at);
 		obj.put("currency", currency);
-		obj.put("customer", ArrayParser.toJSON(customer));
+		obj.put("customer", customer.toJSON());
 		obj.put("discount_codes", ArrayParser.toJSON(discountCodes));
 		obj.put("email", email);
 		obj.put("financial_status", financial_status);
@@ -609,7 +609,9 @@ public class Order extends ShopifyObject {
 		//obj.put("note_attributes", ArrayParser.toJSON(note_attributes));
 		obj.put("number", number);
 		obj.put("order_number", order_number);
-		obj.put("payment_gateway_names", ArrayParser.toJSON(payment_gateway_names));
+		
+		// FIXME: This comes from string
+		//obj.put("payment_gateway_names", ArrayParser.toJSON(payment_gateway_names));
 		obj.put("processed_at", processed_at);
 		obj.put("processing_method", processing_method);
 		obj.put("referring_site", referring_site);
@@ -647,7 +649,9 @@ public class Order extends ShopifyObject {
 		
 		// FIXME: Will not be available if order does not require one
 		
-		//billing_address.fromJSON(billingAddressObject);
+		billing_address = new BillingAddress();
+		billing_address.fromJSON((JSONObject) json.get("billing_address"));
+		setBilling_address(billing_address);
 
 
 		setBrowser_ip((String) json.get("browser_ip"));
@@ -656,12 +660,20 @@ public class Order extends ShopifyObject {
 		setCancelled_at(ISODate((String) json.get("cancelled_at")));
 		setCart_token((String) json.get("cart_token"));
 		
-		setClient_details(ArrayParser.toClientDetails(json.get("client_details")));
+		
+		
+		client_details = new ClientDetails();
+		client_details.fromJSON((JSONObject) json.get("client_details"));
+		
+		setClient_details(client_details);
 		
 		setClosed_at(ISODate((String) json.get("closed_at")));
 		setCreated_at(ISODate((String) json.get("created_at")));
 		setCurrency((String) json.get("currency"));
-		setCustomer(ArrayParser.toCustomers(json.get("customer")));
+		
+		customer = new Customer();
+		customer.fromJSON((JSONObject) json.get("customer"));
+		setCustomer(customer);
 		
 		setDiscountCodes(ArrayParser.toDiscountCodes((JSONArray) json.get("discount_codes")));
 		setEmail((String) json.get("email"));
@@ -669,7 +681,7 @@ public class Order extends ShopifyObject {
 		
 		
 		
-		setFulfillments(ArrayParser.toFulfillments(json.get("fulfillments")));
+		setFulfillments(ArrayParser.toFulfillments((JSONArray) json.get("fulfillments")));
 		setFulfillment_status((String) json.get("fullfillment_status"));
 		setTags((String) json.get("tags"));
 		setId((Long) json.get("id"));
@@ -684,12 +696,13 @@ public class Order extends ShopifyObject {
 		setNumber((Long) json.get("number"));
 		setOrder_number((Long) json.get("order_number"));
 		
-		setPayment_gateway_names(ArrayParser.toGatewayName(json.get("payment_gateway_names")));
+		// FIXME: This comes from string
+		//setPayment_gateway_names(ArrayParser.toGatewayName(json.get("payment_gateway_names")));
 		setProcessed_at(ISODate((String) json.get("processed_at")));
 		setProcessing_method((String) json.get("processing_method"));
 		setReferring_site((String) json.get("referring_site"));
 		setRefunds(ArrayParser.toRefund((JSONArray) json.get("refunds")));
-		setShippingAddress(ArrayParser.toShippingAddress( (JSONObject) json.get("shipping_address")));
+		setShippingAddress(ArrayParser.toShippingAddress((JSONArray) json.get("shipping_address")));
 		setShippingLines(ArrayParser.toShippingLines( (JSONArray) json.get("shipping_lines")));
 		setSource_name((String) json.get("source_name"));
 		
@@ -721,8 +734,8 @@ public class Order extends ShopifyObject {
 		return "Order [billing_address=" + billing_address + ", browser_ip=" + browser_ip
 				+ ", buyer_accepts_marketing=" + buyer_accepts_marketing + ", cancel_reason=" + cancel_reason
 				+ ", cancelled_at=" + cancelled_at + ", cart_token=" + cart_token + ", client_details="
-				+ Arrays.toString(client_details) + ", closed_at=" + closed_at + ", created_at=" + created_at
-				+ ", currency=" + currency + ", customer=" + Arrays.toString(customer) + ", discountCodes="
+				+ client_details + ", closed_at=" + closed_at + ", created_at=" + created_at
+				+ ", currency=" + currency + ", customer=" + customer + ", discountCodes="
 				+ Arrays.toString(discountCodes) + ", email=" + email + ", financial_status=" + financial_status
 				+ ", fulfillments=" + Arrays.toString(fulfillments) + ", fulfillment_status=" + fulfillment_status
 				+ ", tags=" + tags + ", id=" + id + ", landing_site=" + landing_site + ", line_items="
