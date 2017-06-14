@@ -119,7 +119,7 @@ public class ShopifyAPI {
 	 * 
 	 * @return A String containing the api_key for connecting to the Shopify service.
 	 */
-	public String getApi_key() {
+	protected String getApi_key() {
 		return api_key;
 	}
 
