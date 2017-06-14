@@ -125,12 +125,12 @@ public class FulFillment extends ShopifyObject {
 	@Override
 	public void fromJSON(JSONObject json) {
 		
-		this.setCreated_at((Date) json.get("created_at"));
+		this.setCreated_at(ISODate((String) json.get("created_at")));
 		this.setId((Long) json.get("id"));
 		this.setStatus((String) json.get("status"));
 		this.setTracking_company((String) json.get("tracking_company"));
 		this.setTracking_number((String) json.get("tracking_number"));
-		this.setUpdate_at((Date) json.get("update_at"));
+		this.setUpdate_at(ISODate((String) json.get("update_at")));
 		
 	}
 	

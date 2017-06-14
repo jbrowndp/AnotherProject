@@ -21,7 +21,7 @@ import com.datapak.shopify_java_api.model.Transaction;
 public class TransactionInterfaceImpl extends ShopifyInterface implements TransactionInterface {
 	
 
-	private Logger logger = LogManager.getLogger();
+	private Logger logger = LogManager.getLogger(TransactionInterface.class);
 	
 
 	public TransactionInterfaceImpl(ShopifyAPI shopify)

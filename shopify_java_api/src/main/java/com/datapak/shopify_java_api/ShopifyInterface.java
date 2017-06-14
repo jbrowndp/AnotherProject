@@ -12,6 +12,7 @@ import java.net.URL;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.datapak.shopify_java_api.ShopifyAPI;
@@ -20,7 +21,7 @@ import com.sun.jersey.core.util.Base64;
 
 public abstract class ShopifyInterface {
 	
-	private Logger logger = LogManager.getLogger();
+	private Logger logger = LogManager.getLogger(ShopifyInterface.class);
 	
 	private ShopifyAPI shopify;
 	
@@ -129,6 +130,7 @@ public abstract class ShopifyInterface {
 	 * @return <code>JSONObject</code> containing the response from the ShopifyService
 	 * @throws ShopifyError
 	 */
+	@SuppressWarnings("unchecked")
 	protected JSONObject getResponse(String urlString) throws ShopifyError
 	{
 		
@@ -236,7 +238,7 @@ public abstract class ShopifyInterface {
 		
 		if (jsonString==null || jsonString.isEmpty()) { return null; }
 				
-		org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+		JSONParser parser = new JSONParser();
 		
 		logger.entry(jsonString);
 		JSONObject obj=null;

@@ -13,6 +13,10 @@ import com.datapak.shopify_java_api.interfaces.JSONInterface;
  */
 public class ShopifyError extends Exception implements JSONInterface {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String message;
 	private int error_code;
 	private Logger logger = LogManager.getLogger();

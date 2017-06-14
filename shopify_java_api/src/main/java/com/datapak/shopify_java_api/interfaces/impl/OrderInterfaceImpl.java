@@ -24,7 +24,7 @@ import com.datapak.shopify_java_api.model.ShopifyError;
 @SuppressWarnings("unchecked")
 public class OrderInterfaceImpl extends com.datapak.shopify_java_api.ShopifyInterface implements OrderInterface {
 
-	private Logger logger = LogManager.getLogger();
+	private Logger logger = LogManager.getLogger(OrderInterface.class);
 	public OrderInterfaceImpl(ShopifyAPI shopify) {
 
 		super.setShopify(shopify);
@@ -62,7 +62,7 @@ public class OrderInterfaceImpl extends com.datapak.shopify_java_api.ShopifyInte
 				Order order = new Order();
 				order.fromJSON((JSONObject) response.get("order"));
 				
-				logger.info("Successfully canceled & retrieved Order: {} ", order.getId());
+				logger.info("Successfully canceled Order: {} ", order.getId());
 				return true;
 
 			}

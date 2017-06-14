@@ -25,7 +25,7 @@ import com.datapak.shopify_java_api.model.ShopifyError;
 @SuppressWarnings("unchecked")
 public class RefundInterfaceImpl extends ShopifyInterface implements RefundInterface{
 	
-	private Logger logger = LogManager.getLogger();
+	private Logger logger = LogManager.getLogger(RefundInterface.class);
 	
 	public RefundInterfaceImpl(ShopifyAPI shopify)
 	{

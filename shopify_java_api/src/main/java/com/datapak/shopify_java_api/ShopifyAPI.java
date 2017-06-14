@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.datapak.shopify_java_api.interfaces.OrderInterface;
 import com.datapak.shopify_java_api.interfaces.RefundInterface;
 import com.datapak.shopify_java_api.interfaces.TransactionInterface;
@@ -14,6 +17,7 @@ import com.datapak.shopify_java_api.interfaces.impl.TransactionInterfaceImpl;
 
 public class ShopifyAPI {
 	
+	private Logger logger = LogManager.getLogger(ShopifyAPI.class);
 	private String api_key;
 	private String password;
 	private String shop_name;
@@ -34,10 +38,20 @@ public class ShopifyAPI {
 		Properties prop = new Properties();
 	    input = ShopifyAPI.class.getClassLoader().getResourceAsStream("shopify.properties");
 	 	try {
+	 		
+	 		if (input==null)
+			{
+				logger.fatal("No credentials specified.");
+				System.exit(0);
+			}
+	 		
 			prop.load(input);
+			
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			System.exit(0);
 		}
 	 	
 	 	

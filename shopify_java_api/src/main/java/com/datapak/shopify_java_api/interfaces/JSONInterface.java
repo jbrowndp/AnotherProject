@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
  */
 public interface JSONInterface {
 	
-	Logger logger = LogManager.getLogger();
+	Logger logger = LogManager.getLogger(JSONInterface.class);
 	
 	/** Converts object instance into JSON
 	 * 
