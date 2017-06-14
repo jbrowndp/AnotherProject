@@ -84,6 +84,13 @@ public class RefundInterfaceImpl extends ShopifyInterface implements RefundInter
 		
 		logger.info("Calculating refund for OrderID: {} , Refund Line Items: {}, Shipping: {}", orderId, refund_line_items, shipping);
 		
+		if (refund_line_items==null)
+		{
+			logger.error("There are no refund_line_items available for OrderID: {}", orderId);
+			return null;
+		}
+		
+		
 		String urlString = "orders/" + orderId + "/refunds/calculate.json";
 		
 		JSONArray refundLineItemsArray = new JSONArray();
@@ -116,7 +123,7 @@ public class RefundInterfaceImpl extends ShopifyInterface implements RefundInter
 		
 		//Refund suggested_refund = parser.convertRefundFromJSON((JSONObject) );
 		
-		logger.traceExit(suggested_refund);
+		logger.info("Order ID:{}, Suggested Refund: {}", orderId, suggested_refund);
 		
 		return suggested_refund;
 	}

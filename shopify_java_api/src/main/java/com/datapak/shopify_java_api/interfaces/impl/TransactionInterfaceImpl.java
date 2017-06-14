@@ -125,9 +125,11 @@ public class TransactionInterfaceImpl extends ShopifyInterface implements Transa
 			throw e;
 		}
 		
+		Long count = (Long) response.get("count");
 		
+		logger.info("Retrieved Order ID: {}, Transaction Count: {}", orderId, String.valueOf(count));
 		
-		return (Long) response.get("count");
+		return count;
 		
 	}
 	

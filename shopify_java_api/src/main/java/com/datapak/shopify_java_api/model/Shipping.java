@@ -85,7 +85,10 @@ public class Shipping extends ShopifyObject {
 			}
 			
 			this.setAmount(Double.valueOf((String) json.get("amount")));
+			
+			if (json.get("maximum_refundable")!=null){
 			this.setMaximum_refundable(Double.valueOf((String) json.get("maximum_refundable")));
+			}
 			this.setTax(Double.valueOf((String) json.get("tax")));
 				
 		}

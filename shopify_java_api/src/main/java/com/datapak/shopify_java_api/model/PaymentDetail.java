@@ -21,15 +21,25 @@ public class PaymentDetail extends ShopifyObject {
 	 * 
 	 * @return char object containing the response code from AVS
 	 */
-	public char getAvs_result_code() {
+	public Character getAvs_result_code() {
 		return avs_result_code;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "PaymentDetail [avs_result_code=" + avs_result_code + ", credit_card_bin=" + credit_card_bin
+				+ ", credit_card_company=" + credit_card_company + ", credit_card_number=" + credit_card_number
+				+ ", cvv_result_code=" + cvv_result_code + "]";
+	}
+
 	/** Gets the response code from AVS the address verification system.
 	 * 
 	 * @param avs_result_code The response code from AVS
 	 */
-	public void setAvs_result_code(char avs_result_code) {
+	public void setAvs_result_code(Character avs_result_code) {
 		this.avs_result_code = avs_result_code;
 	}
 	
@@ -106,7 +116,7 @@ public class PaymentDetail extends ShopifyObject {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public JSONObject toJSON() {
+	protected JSONObject toJSON() {
 	
 		JSONObject obj = new JSONObject();
 		
@@ -121,7 +131,7 @@ public class PaymentDetail extends ShopifyObject {
 	}
 
 	@Override
-	public void fromJSON(JSONObject json) {
+	protected void fromJSON(JSONObject json) {
 		
 		
 		if (json==null) { 

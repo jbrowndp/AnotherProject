@@ -5,9 +5,9 @@ import com.datapak.shopify_java_api.model.Transaction;
 
 public interface TransactionInterface {
 
-	Long getTransactionCount(Long order_id_bad) throws ShopifyError;
+	Long getTransactionCount(Long order_id) throws ShopifyError;
 
-	Transaction[] getTransactions(Long order_id_bad) throws ShopifyError;
+	Transaction[] getTransactions(Long order_id) throws ShopifyError;
 
 	Transaction captureTransaction(Long order_id) throws ShopifyError;
 	

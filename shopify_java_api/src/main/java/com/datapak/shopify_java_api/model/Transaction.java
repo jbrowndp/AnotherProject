@@ -26,7 +26,7 @@ public class Transaction implements JSONInterface {
 	private String device_id;
 	private String gateway;
 	private String source_name;
-	private PaymentDetail[] payment_details;
+	private PaymentDetail payment_details;
 	private Long id;
 	private String kind;
 	private Long order_id;
@@ -148,7 +148,7 @@ public class Transaction implements JSONInterface {
 	 * @return Payment Details array containing information about the credit card used for this transaction.
 	 * @see PaymentDetail
 	 */
-	public PaymentDetail[] getPayment_details() {
+	public PaymentDetail getPayment_details() {
 		return payment_details;
 	}
 	
@@ -157,7 +157,7 @@ public class Transaction implements JSONInterface {
 	 * @param paymentDetails array containing information about the credit card used for this transaction.
 	 * @see PaymentDetail
 	 */
-	public void setPayment_details(PaymentDetail[] paymentDetails) {
+	public void setPayment_details(PaymentDetail paymentDetails) {
 		this.payment_details = paymentDetails;
 	}
 	
@@ -346,7 +346,7 @@ public class Transaction implements JSONInterface {
 		obj.put("device_id", device_id);
 		obj.put("gateway", gateway);
 		obj.put("source_name", source_name);
-		obj.put("payment_details", ArrayParser.toJSON(payment_details));
+		obj.put("payment_details", payment_details);
 		obj.put("id", id);
 		obj.put("kind", kind);
 		obj.put("order_id", order_id);
@@ -382,7 +382,11 @@ public class Transaction implements JSONInterface {
 		
 		//FIXME: Returns JSONObject need to parse this
 		this.setReceipt((String) json.get("recieipt"));
-		this.setPayment_details(ArrayParser.toPaymentDetails((JSONArray) json.get("payment_details")));
+		
+		
+		payment_details = new PaymentDetail();
+		payment_details.fromJSON((JSONObject) json.get("payment_details"));
+		this.setPayment_details(payment_details);
 
 		
 		//FIXME: Returning null here

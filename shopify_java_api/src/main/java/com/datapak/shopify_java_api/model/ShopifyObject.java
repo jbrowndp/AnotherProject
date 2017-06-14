@@ -21,14 +21,14 @@ public abstract class ShopifyObject {
 	 * 
 	 * @return <code>JSONObject</code> containing parameters of object's instance
 	 */
-	public abstract JSONObject toJSON();
+	protected abstract JSONObject toJSON();
 	
 	
 	/** Converts JSONObject into object instance
 	 * @param json    JSONObject to convert
 	 * 
 	 */
-	public abstract void fromJSON(JSONObject json);
+	protected abstract void fromJSON(JSONObject json);
 
 	/** Converts dates received from Shopify Service into ISO8601 format
 	 * @param ISO8601DateString  A string containing a date in ISO8601 format.
