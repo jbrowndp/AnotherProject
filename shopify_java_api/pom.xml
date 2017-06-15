@@ -145,8 +145,8 @@
 		</dependency>
 	</dependencies>
 	<scm>
-		<url>scm:git:https://github.com/Datapak/shopify_java_api.git</url>
+		<url>scm:git:git@github.com:Datapak/shopify_java_api.git</url>
 		<connection>scm:git:git@github.com:Datapak/shopify_java_api.git</connection>
-		<developerConnection>scm:git:https://github.com/Datapak/shopify_java_api.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:Datapak/shopify_java_api.git</developerConnection>
 	</scm>
 </project>
