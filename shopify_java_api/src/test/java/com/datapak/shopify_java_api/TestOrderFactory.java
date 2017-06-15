@@ -42,7 +42,7 @@ public class TestOrderFactory{
 				logger.info("There are no {} orders available for testing.",  status);
 				}
 		} catch (ShopifyError e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return null;
@@ -71,7 +71,7 @@ public class TestOrderFactory{
 				logger.info("There are no orders with tag: {} available for testing.",  tagName);
 				}
 		} catch (ShopifyError e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return null;
@@ -146,15 +146,17 @@ public class TestOrderFactory{
 	}
 
 
-	public static Transaction getTransactionforTesting(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	public static String getShippingAmount(Order order) {
 	
 		return String.valueOf("0.01");
+	}
+
+
+	public static Transaction getTransactionforTesting(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

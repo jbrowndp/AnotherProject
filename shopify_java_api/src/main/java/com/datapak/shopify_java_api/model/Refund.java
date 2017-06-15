@@ -84,10 +84,6 @@ public class Refund extends ShopifyObject {
 		this.shipping = shipping;
 	}
 	
-	public void setNotify(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public String toString() {
 		return "Refund [created_at=" + created_at + ", processed_at=" + processed_at + ", id=" + id

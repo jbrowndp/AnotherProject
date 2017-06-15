@@ -17,7 +17,7 @@ public interface RefundInterface {
 	 * 
 	 * @param order_id A Long object containing the order Id 
 	 * @return Refund[] containing A list of refunds for order
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order is not found or there is some issue
 	 */
 	Refund[] getRefunds(Long order_id) throws ShopifyError;
 
@@ -29,7 +29,7 @@ public interface RefundInterface {
 	 * @param order_id A string containing the order Id
 	 * @param refund_id  A string containing the id of the refund
 	 * @return Refund object containing refund for the order
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order/refund is not found or there is some issue
 	 */
 	Refund getRefund(Long order_id, Long refund_id) throws ShopifyError;
 
@@ -40,7 +40,7 @@ public interface RefundInterface {
 	 * @param order_id  A string containing  the order Id
 	 * @param refund A refund object containing information about refund to process
 	 * @return Refund object containing the processed refund.
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order is not found or there is some issue
 	 */
 	Refund createRefund(Long order_id, Refund refund) throws ShopifyError;
 	
@@ -53,7 +53,7 @@ public interface RefundInterface {
 	 * @param lineItems Array of line item IDs and quantities to refund 
 	 * @param shipping  <code>Shipping</code> Object specifying how much shipping to refund.
 	 * @return <code>Refund Object </code> containing the suggested refund.
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order is not found or there is some issue
 	 */
 	Refund calculateRefund(Long order_id, Refund_Line_Item[] lineItems, Shipping shipping) throws ShopifyError;
 	

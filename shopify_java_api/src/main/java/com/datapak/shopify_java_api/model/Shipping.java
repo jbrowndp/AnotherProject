@@ -15,7 +15,7 @@ public class Shipping extends ShopifyObject {
 		private Double maximum_refundable;
 
 		public Double getAmount() {
-			// TODO Auto-generated method stub
+			
 			return amount;
 		}
 		/**
@@ -66,7 +66,7 @@ public class Shipping extends ShopifyObject {
 		@SuppressWarnings("unchecked")
 		@Override
 		public JSONObject toJSON() {
-			// TODO Auto-generated method stub
+			
 			
 			JSONObject obj = new JSONObject();
 			obj.put("amount", amount);

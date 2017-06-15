@@ -25,7 +25,7 @@ public interface OrderInterface {
 	 *            String containing cancellation note
 	 * @return <code>Order</code> object containing the cancelled order
 	 *         information
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order is not found or there is some issue
 	 */
 	boolean cancelOrder(Long order_id, String amount, String note) throws ShopifyError;
 
@@ -41,7 +41,7 @@ public interface OrderInterface {
 	 *            <code>Refund</code> object containing the amount to be refunded.
 	 * @return <code>Order</code> object containing the cancelled order
 	 *         information
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order is not found or there is some issue
 	 */
 	boolean cancelOrder(Long order_id, Refund refund) throws ShopifyError;
 
@@ -51,7 +51,7 @@ public interface OrderInterface {
 	 * 
 	 * @param order_id The id of the order to cancel
 	 * @return <code>Order</code> object containing the cancelled order
-	 * @throws ShopifyError
+	 * @throws ShopifyError if order is not found or there is some issue
 	 */
 	boolean cancelOrder(Long order_id) throws ShopifyError;
 	
@@ -59,7 +59,7 @@ public interface OrderInterface {
 	/**
 	 * Retrieve all orders in Shopify Store
 	 * @return <code> Order[] </code> object containing all orders
-	 * @throws ShopifyError 
+	 * @throws ShopifyError if orders are not found or there is some issue
 	 */
 	Order[] getOrders() throws ShopifyError;
 

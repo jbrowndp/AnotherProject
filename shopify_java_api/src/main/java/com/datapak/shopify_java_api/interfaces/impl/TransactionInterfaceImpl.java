@@ -14,9 +14,11 @@ import com.datapak.shopify_java_api.interfaces.TransactionInterface;
 import com.datapak.shopify_java_api.model.ArrayParser;
 import com.datapak.shopify_java_api.model.ShopifyError;
 import com.datapak.shopify_java_api.model.Transaction;
-
-
-
+/** @see TransactionInterface
+ * 
+ * @author jbrown
+ *
+ */
 @SuppressWarnings("unchecked")
 public class TransactionInterfaceImpl extends ShopifyInterface implements TransactionInterface {
 	
@@ -29,14 +31,7 @@ public class TransactionInterfaceImpl extends ShopifyInterface implements Transa
 		super.setShopify(shopify);
 	}
 
-	/** Retrieve a specific transaction.
-	 * 
-	 * 
-	 * @param orderId        The order Id
-	 * @param transactionId  The id of the transaction
-	 * 
-	 * @throws ShopifyError	
-	 */
+
 	public Transaction getTransaction(Long orderId, Long transactionId) throws ShopifyError 
 	{
 		logger.info("Getting transaction - Order ID: {}  TransactionID: {}", orderId, transactionId);
@@ -225,11 +220,6 @@ public class TransactionInterfaceImpl extends ShopifyInterface implements Transa
 		
 	}
 
-	@Override
-	public Transaction createTransaction(Transaction transaction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 			  	
 

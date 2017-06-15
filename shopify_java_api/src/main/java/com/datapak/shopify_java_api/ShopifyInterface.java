@@ -32,7 +32,7 @@ public abstract class ShopifyInterface {
 	 * @param urlString The url of the REST service provided by Shopify
 	 * @param postData  The data to send with the request.
 	 * @return <code>JSONObject</code> containing the response from the Shopify Service
-	 * @throws ShopifyError
+	 * @throws ShopifyError if there is some issue with processing from Shopify
 	 */
 	protected JSONObject doPost(String urlString, String postData) throws ShopifyError
 	{
@@ -60,8 +60,8 @@ public abstract class ShopifyInterface {
 				response = toJSON(processResponse(conn));
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e.getMessage());
+
 			}
 			
 			return response;
@@ -128,7 +128,7 @@ public abstract class ShopifyInterface {
 	 * 
 	 * @param urlString  The url of the REST service provided by Shopify
 	 * @return <code>JSONObject</code> containing the response from the ShopifyService
-	 * @throws ShopifyError
+	 * @throws ShopifyError if there is some issue with processing from Shopify
 	 */
 	@SuppressWarnings("unchecked")
 	protected JSONObject getResponse(String urlString) throws ShopifyError
@@ -186,14 +186,12 @@ public abstract class ShopifyInterface {
 
 						
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			logger.error(e.getMessage());
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		
 		logger.debug(response);

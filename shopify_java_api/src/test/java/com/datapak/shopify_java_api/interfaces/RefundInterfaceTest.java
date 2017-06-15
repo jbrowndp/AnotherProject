@@ -19,6 +19,7 @@ import com.datapak.shopify_java_api.model.ShopifyError;
 public class RefundInterfaceTest {
 	
 	private ShopifyAPI shopify = new ShopifyAPI();
+
 	
 	private static Order order1;
 	private static Order order2;
@@ -79,9 +80,10 @@ public class RefundInterfaceTest {
 			assertNotNull("Response is null", response);
 			assertNotEquals(0,response.length);
 		} catch (ShopifyError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertNotEquals(e.getMessage(), e.getMessage().contains("error"));
 		}
+		
+		
 		
 	}
 	

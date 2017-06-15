@@ -5,13 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.datapak.shopify_java_api.interfaces.JSONInterface;
 
 /** Handles exceptions thrown by Shopify Interface 
  *  @author jbrown
  *  @version 1.0
  */
-public class ShopifyError extends Exception implements JSONInterface {
+public class ShopifyError extends Exception {
 	
 	/**
 	 * 
@@ -21,14 +20,6 @@ public class ShopifyError extends Exception implements JSONInterface {
 	private int error_code;
 	private Logger logger = LogManager.getLogger();
 	
-	public ShopifyError(String message) {
-		this.message = message;
-	}
-
-	public ShopifyError() {
-		// TODO Auto-generated constructor stub
-	}
-
 	
 	/** Sets the error message
 	 * 
@@ -52,19 +43,9 @@ public class ShopifyError extends Exception implements JSONInterface {
 		
 	}
 
-	/** @see JSONInterface
-	 * 
+	/** Converts from JSON to ShopifyError
+	 *  @param json  JSONObject containing ShopifyError
 	 */
-	@Override
-	public JSONObject toJSON() {
-		
-		return null;
-	}
-
-	/** @see JSONInterface
-	 * 
-	 */
-	@Override
 	public void fromJSON(JSONObject json) {
 		
 		logger.traceEntry(json.toJSONString());

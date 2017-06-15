@@ -3,10 +3,8 @@ package com.datapak.shopify_java_api.model;
 
 import java.util.Date;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.datapak.shopify_java_api.interfaces.JSONInterface;
 
 
 /** 
@@ -16,7 +14,7 @@ import com.datapak.shopify_java_api.interfaces.JSONInterface;
  * 
  * 
  * **/
-public class Transaction implements JSONInterface {
+public class Transaction extends ShopifyObject {
 	
 	private String amount;
 	
@@ -328,11 +326,6 @@ public class Transaction implements JSONInterface {
 	}
 	
 	
-	
-	public void setParent_id(String string) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

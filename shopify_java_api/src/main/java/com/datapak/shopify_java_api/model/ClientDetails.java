@@ -28,7 +28,7 @@ public class ClientDetails extends ShopifyObject{
 	}
 	/**
 	 * 
-	 * @param accept_language 
+	 * @param accept_language  The accept language
 	 */
 	public void setAccept_language(String accept_language) {
 		this.accept_language = accept_language;
